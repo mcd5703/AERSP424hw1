@@ -1,8 +1,4 @@
-#include <iostream>
-#include <map>
-#include <string>
-
-using namespace std;
+#include "Problem2.hpp"
 
 int main() {
     // Declare Map to store the destination name as a string and distance as an int
