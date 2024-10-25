@@ -1,79 +1,52 @@
-#include <iostream>
-#include <string>
-#include <map>
-
-using namespace std;
+#include "Problem2.hpp"
+#include "Problem3.hpp"
 
 class Plane {
 private:
-    // Private members
-    double pos;
-    double vel;
-    double distance;
-    bool at_SCE;
+    // Declaring variables as private
+    pos;
+    vel;
+    dist;
+    at_SC;
     string origin;
-    string destination;
-    
-    // Flight distance map (container from question 2)
-    map<string, int> flightDistances;
+    string dest;    
 
 public:
-    // Constructor that takes in two strings (origin and destination)
+    // Constructor that takes in two strings
     Plane(string from, string to) {
         origin = from;
-        destination = to;
+        dest = to;
         pos = 0.0;
         vel = 0.0;
-        distance = 0.0;
-        at_SCE = (from == "SCE");
+        dist = 0.0;
+        at_SC = (from == "SCE");
 
-        // Initialize flight distances (container)
+        // Add int flight distances to destination strings
         flightDistances["PHL"] = 160;
         flightDistances["ORD"] = 640;
         flightDistances["EWR"] = 220;
 
-        // Set the distance for this flight from the container
+        // Use the container to set flight distances
         if (flightDistances.find(to) != flightDistances.end()) {
-            distance = flightDistances[to];
-        } else {
-            distance = 0.0; // If destination is not found, set distance to 0
-        }
-    }
+            dist = flightDistances[to];} 
+        else {
+            dist = 0.0;}} 
 
     // Destructor
     ~Plane() {
-        // No specific resource management needed, just printing for visibility
-        cout << "Plane from " << origin << " to " << destination << " destroyed." << endl;
-    }
+        cout << "Plane from " << origin << " to " << dest << " destroyed." << endl;}
 
-    // Function 'operate' that takes a double 'dt' and returns nothing
+    // Function that would take an input of dt and compute new position
     void operate(double dt) {
-        // Placeholder function to simulate operation (no real functionality yet)
-        // This function would typically update the position based on velocity and dt
         pos += vel * dt;
-        cout << "Plane operated for " << dt << " seconds. Current position: " << pos << endl;
-    }
+        cout << "Plane operated for " << dt << " seconds. Current position: " << pos << endl;}
 
     // Getter functions
-    double getPos() const { return pos; }
-    string getOrigin() const { return origin; }
-    string getDestination() const { return destination; }
-    bool getAtSCE() const { return at_SCE; }
+    double getPos() const{return pos;}
+    string getOrigin() const{return origin;}
+    string getDestination() const{return dest;}
+    bool getAtSCE() const{return at_SC;}
 
-    // Getter and setter for velocity
-    double getVel() const { return vel; }
-    void setVel(double newVel) { vel = newVel; }
-};
-
-int main() {
-    // Example usage (will not run actual functionality, just for setup)
-    Plane plane("SCE", "PHL");
-    
-    // Test getters and setters
-    plane.setVel(300.0);
-    cout << "Velocity set to: " << plane.getVel() << " mph" << endl;
-    
-    plane.operate(1.0);  // Simulate operation for 1 second
-
-    return 0;
-}
+    // Getter and setter functions
+    double getVel() const {return vel;}
+    void setVel(double newVel) {vel = newVel;}};
