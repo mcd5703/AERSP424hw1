@@ -20,15 +20,16 @@ public:
         vel = 0.0;
         dist = 0.0;
         at_SC = (from == "SCE");
+        map<string, int> flight_dist;
 
         // Add int flight distances to destination strings
-        flightDistances["PHL"] = 160;
-        flightDistances["ORD"] = 640;
-        flightDistances["EWR"] = 220;
+        flight_dist["PHL"] = 160;
+        flight_dist["ORD"] = 640;
+        flight_dist["EWR"] = 220;
 
         // Use the container to set flight distances
-        if (flightDistances.find(to) != flightDistances.end()) {
-            dist = flightDistances[to];} 
+        if (flight_dist.find(to) != flight_dist.end()) {
+            dist = flight_dist[to];} 
         else {
             dist = 0.0;}} 
 
