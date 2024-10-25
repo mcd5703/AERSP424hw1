@@ -1,8 +1,7 @@
-using namespace std;
 #include<iostream>
 #include<map>
 #include<string>
+using namespace std;
 
-    // Declare Map to store the destination name as a string and distance as an int
-    map<string, int> flight_dist;
-    
+// Creating the map container for airport name and flight distance as an int
+map<string, int> flight_dist;
