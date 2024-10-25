@@ -2,22 +2,32 @@
 #include<iomanip>
 #include<vector>
 using namespace std;
+// All necessary include statements
 
 // Declaring variables for calculations
-double empty_weight, empty_weight_moment;
-int num_front_occupants;
-int num_rear_occupants;
-double front_seat_arm, rear_seat_arm;
-double fuel_weight_per_gallon, fuel_tank_arm;
-double baggage_weight, baggage_arm;
-double gallons_of_fuel;
+double Empty_W, Empty_WM;
+int num_focc;
+int num_rocc;
+double fr_arm, r_arm;
+double fuel_WPG, fuel_arm;
+double bag_w, bag_arm;
+double fuel_gal;
+double tot_FW = 0.0;
+double tot_RW = 0.0;
+double tot_fmom;
+double tot_rmom;
+double tot_FW;
+double tot_FMom;
+double tot_bagmom;
+double gross_w;
+double tot_mom;
+double CG;
 
-// Declaring max allowed design limits
-const double MAX_GROSS_WEIGHT = 2950.0;
-const double FORWARD_CG_LIMIT = 82.1;
-const double AFT_CG_LIMIT = 84.7;
+// Defining max allowed design limits
+const double Max_GW = 2950.0;
+const double Forward_CGL = 82.1;
+const double Aft_CGL = 84.7;
 
-vector<double> front_occupant_weights(num_front_occupants);
-vector<double> rear_occupant_weights(num_rear_occupants);
-double total_front_weight = 0.0;
-double total_rear_weight = 0.0;
+// Setting up vectors for passengers and respective weights
+vector<double> foccw(num_focc);
+vector<double> roccw(num_rocc);
