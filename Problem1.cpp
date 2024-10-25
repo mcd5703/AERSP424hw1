@@ -1,5 +1,6 @@
 #include <iostream>
-#include <iomanip> 
+#include <iomanip>
+#include <vector>
 using namespace std;
 
 // Function to calculate moment
@@ -10,8 +11,8 @@ double calculateMoment(double weight, double arm) {
 int main() {
     // Declare variables
     double empty_weight, empty_weight_moment;
-    const int num_front_occupants = 0;
-    const int num_rear_occupants = 0;
+    int num_front_occupants;
+    int num_rear_occupants;
     double front_seat_arm, rear_seat_arm;
     double fuel_weight_per_gallon, fuel_tank_arm;
     double baggage_weight, baggage_arm;
@@ -31,7 +32,7 @@ int main() {
     // Input front seat occupants and moment arm
     cout << "Enter the number of front seat occupants: ";
     cin >> num_front_occupants;
-    double front_occupant_weights[num_front_occupants];
+    vector<double> front_occupant_weights(num_front_occupants);
     for (int i = 0; i < num_front_occupants; ++i) {
         cout << "Enter the weight of front seat occupant " << i+1 << " (lbs): ";
         cin >> front_occupant_weights[i];
@@ -42,7 +43,7 @@ int main() {
     // Input rear seat occupants and moment arm
     cout << "Enter the number of rear seat occupants: ";
     cin >> num_rear_occupants;
-    double rear_occupant_weights[num_rear_occupants];
+    vector<double> rear_occupant_weights(num_rear_occupants);
     for (int i = 0; i < num_rear_occupants; ++i) {
         cout << "Enter the weight of rear seat occupant " << i+1 << " (lbs): ";
         cin >> rear_occupant_weights[i];
@@ -66,19 +67,17 @@ int main() {
 
     // Calculate total weight and moment for front occupants
     double total_front_weight = 0.0;
-    double total_front_moment = 0.0;
     for (int i = 0; i < num_front_occupants; ++i) {
         total_front_weight += front_occupant_weights[i];
     }
-    total_front_moment = calculateMoment(total_front_weight, front_seat_arm);
+    double total_front_moment = calculateMoment(total_front_weight, front_seat_arm);
 
     // Calculate total weight and moment for rear occupants
     double total_rear_weight = 0.0;
-    double total_rear_moment = 0.0;
     for (int i = 0; i < num_rear_occupants; ++i) {
         total_rear_weight += rear_occupant_weights[i];
     }
-    total_rear_moment = calculateMoment(total_rear_weight, rear_seat_arm);
+    double total_rear_moment = calculateMoment(total_rear_weight, rear_seat_arm);
 
     // Calculate total weight and moment for fuel
     double total_fuel_weight = gallons_of_fuel * fuel_weight_per_gallon;
@@ -100,31 +99,37 @@ int main() {
     cout << "Center of Gravity (CG): " << CG << " inches" << endl;
 
     // Check if gross weight and CG are within limits
-    if (gross_weight > MAX_GROSS_WEIGHT) {
-        cout << "Error: Gross weight exceeds maximum allowable limit of " << MAX_GROSS_WEIGHT << " lbs." << endl;
-    } else if (CG < FORWARD_CG_LIMIT || CG > AFT_CG_LIMIT) {
-        cout << "Error: Center of Gravity is out of allowable range (" << FORWARD_CG_LIMIT << " to " << AFT_CG_LIMIT << " inches)." << endl;
-
-        // Adjust fuel to bring CG within limits
+    if (gross_weight > MAX_GROSS_WEIGHT || CG < FORWARD_CG_LIMIT || CG > AFT_CG_LIMIT) {
+        cout << "Error: Gross weight and/or Center of Gravity are out of allowable limits." << endl;
+        
+        // Adjust fuel to bring gross weight and CG within limits
         double new_gallons_of_fuel = gallons_of_fuel;
-        while (CG < FORWARD_CG_LIMIT || CG > AFT_CG_LIMIT) 
+        bool success = false;
+        while (new_gallons_of_fuel >= 0) 
         {
-            if (CG < FORWARD_CG_LIMIT) {
-                new_gallons_of_fuel -= 0.01; // Drain fuel
-            } else if (CG > AFT_CG_LIMIT) {
-                new_gallons_of_fuel += 0.01; // Add fuel
-            }
-
             total_fuel_weight = new_gallons_of_fuel * fuel_weight_per_gallon;
             total_fuel_moment = calculateMoment(total_fuel_weight, fuel_tank_arm);
             gross_weight = empty_weight + total_front_weight + total_rear_weight + total_fuel_weight + baggage_weight;
             total_moment = empty_weight_moment + total_front_moment + total_rear_moment + total_fuel_moment + total_baggage_moment;
             CG = total_moment / gross_weight;
+
+            if (gross_weight <= MAX_GROSS_WEIGHT && CG >= FORWARD_CG_LIMIT && CG <= AFT_CG_LIMIT) {
+                success = true;
+                break;
+            }
+
+            new_gallons_of_fuel -= 0.01; // Drain fuel
+            if (new_gallons_of_fuel < 0)
+                new_gallons_of_fuel = 0;
         }
 
-        cout << "Adjusted fuel amount to meet CG limits: " << new_gallons_of_fuel << " gallons" << endl;
-        cout << "New Gross weight: " << gross_weight << " lbs" << endl;
-        cout << "New Center of Gravity (CG): " << CG << " inches" << endl;
+        if (success) {
+            cout << "Adjusted fuel amount to meet limits: " << new_gallons_of_fuel << " gallons" << endl;
+            cout << "New Gross weight: " << gross_weight << " lbs" << endl;
+            cout << "New Center of Gravity (CG): " << CG << " inches" << endl;
+        } else {
+            cout << "Unable to adjust fuel to meet gross weight and CG limits." << endl;
+        }
     } else {
         cout << "Gross weight and CG are within limits." << endl;
     }
