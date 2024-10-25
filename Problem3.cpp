@@ -1,5 +1,4 @@
 #include "Problem2.hpp"
-#include "Problem2.cpp"
 
 class Plane {
 private:
@@ -20,7 +19,6 @@ public:
         vel = 0.0;
         dist = 0.0;
         at_SC = (from == "SCE");
-        map<string, int> flight_dist;
 
         // Add int flight distances to destination strings
         flight_dist["PHL"] = 160;
