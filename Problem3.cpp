@@ -1,13 +1,13 @@
 #include "Problem2.hpp"
-#include "Problem3.hpp"
+#include "Problem2.cpp"
 
 class Plane {
 private:
     // Declaring variables as private
-    pos;
-    vel;
-    dist;
-    at_SC;
+    double pos;
+    double vel;
+    double dist;
+    bool at_SC;
     string origin;
     string dest;    
 
