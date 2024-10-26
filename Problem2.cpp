@@ -10,4 +10,5 @@ int main() {
     cout << "Flight distances from University Park Airport (SCE):" << endl;
     for (const auto& flight : flight_dist) {
         cout << "SCE to " << flight.first << ": " << flight.second << " miles." << endl;}
-    return 0;}
+    return 0;
+}

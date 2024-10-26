@@ -41,8 +41,9 @@ public:
     // Method to calculate distance between two airports
     double calculateDistance(const std::string& from, const std::string& to) {
         // Dummy implementation - replace with actual logic based on Q2
-        return abs(static_cast<int>(from.length() - to.length())) * 100.0;}
-
+        return abs(static_cast<int>(from.length() - to.length())) * 100.0;
+    };
+    
     // Operate function (based on a presumed flowchart)
     void operate(double timeStep) {
         if (timeStep < 0) {
@@ -54,7 +55,9 @@ public:
         // Update other variables
         at_SC -= timeStep;
         if (at_SC < 0) {
-            at_SC = 0;}}};
+            at_SC = 0;}
+    };
+};
 
 int main() {
     // Create a plane object
@@ -64,4 +67,5 @@ int main() {
     //plane.setVelo(600);  // Set velocity to 600 units (km/h or m/s depending on your unit)
     //plane.operate(5);        // Simulate 5 seconds of operation
     //cout << "Plane position after 5 seconds: " << plane.getPos() << endl;
-    //return 0;}
+    //return 0;
+}
