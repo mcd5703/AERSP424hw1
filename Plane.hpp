@@ -2,10 +2,10 @@
 #define PLANE_HPP
 
 // Plane.hpp
-#include "Problem2.hpp" // Container from problem 2
 #include <iostream>
 #include <string>
 #include <algorithm> // For swap
+#include <map>
 using namespace std;
 
 // The plane class of Problem 3 & 4 is defined here
@@ -18,7 +18,8 @@ private:
     bool at_SCE;        // At SCE?
     string origin;      // Origin
     string destination; // Destination
-
+    // Pasted map container from problem 2.
+    map<string, int> flight_dist;
 
     // Method to help calculate distance between two airports
     double calculateDistance(const string& from, const string& to) 
@@ -45,13 +46,18 @@ public:
     Plane(const string& from, const string& to)
         : origin(from), destination(to), pos(0), vel(0), at_SCE(false) 
     {
+        // Adding the flight distances to the map container in the constructor to initialize the flight map
+        flight_dist["PHL"] = 160;  // Flight distance between State College and Philadelphia
+        flight_dist["ORD"] = 640;  // Flight distance between State College and Chicago
+        flight_dist["EWR"] = 220;  // Flight distance between State College and Newark
+
         dist = calculateDistance(origin, destination);
         cout << "Plane created with with a tail number at: " << this << endl;
     }
 
-    // Destructor
+    // Deconstructor
     ~Plane() {
-        cout << endl << "Plane should get destroyed ... now!" << endl;
+        cout << "Plane should get destroyed ... now!" << endl;
         cout << "Plane Destroyed." << endl;
     }
 
@@ -76,19 +82,19 @@ public:
 
         if (pos < dist) {
             pos += vel * dt;
-            if (pos > dist) {
+            if (pos > dist) 
+            {
                 pos = dist; // Cap position at distance
             }
             at_SCE = false;
         } else {
-            if (destination == "SCE") {
+            if (destination == "SCE") 
+            {
                 at_SCE = true;
             }
-            // Swap origin and destination
-            swap(origin, destination);
-            // Recalculate distance after swapping
-            dist = calculateDistance(origin, destination);
-            pos = 0;
+            swap(origin, destination);                      // Swap origin and destination
+            dist = calculateDistance(origin, destination);  // Recalculate distance after swapping
+            pos = 0.0;
         }
     }
 };
