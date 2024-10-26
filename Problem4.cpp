@@ -1,7 +1,4 @@
-#include <iostream>
-#include <cmath>   
-#include <string>  
-using namespace std;
+#include "Problem2.hpp"
 
 class Plane {
 private:
@@ -14,27 +11,32 @@ private:
 
 public:
     // Constructor
-    Plane(const std::string& from, const std::string& to) 
+    Plane(const string& from, const string& to) 
         : origin(from), dest(to), pos(0), velo(0), at_SC(0) {
         dist = calculateDistance(origin, dest);
-        std::cout << "Plane Created at " << this << std::endl;}
+        cout << "Plane Created at " << this << endl;}
 
     // Destructor
     ~Plane() {
         cout << "Plane Destroyed" << endl;}
 
     // Getter functions
-    string getOrigin() const { return origin; }
-    string getDest() const { return dest; }
-    double getDist() const { return dist; }
-    double getPos() const { return pos; }
-    double getVelo() const { return velo; }
-    double getAtSC() const { return at_SC; }
+    string getOrigin() const{return origin;}
+    string getDest() const{return dest;}
+    double getDist() const{return dist;}
+    double getPos() const{return pos;}
+    double getVelo() const{return velo;}
+    double getAtSC() const{return at_SC;}
 
     // Setter functions
     void setPos(double position) {pos = position >= 0 ? position : 0;}
     void setVelo(double velocity) {velo = velocity >= 0 ? velocity : 0;}
     void setAtSC(double timeAtSC) {at_SC = timeAtSC >= 0 ? timeAtSC : 0;}
+
+    // Setting flight distance and airport container
+    flight_dist["PHL"] = 160;  // Flight distance between State College and Philadelphia
+    flight_dist["ORD"] = 640;  // Flight distance between State College and Chicago
+    flight_dist["EWR"] = 220;  // Flight distance between State College and Newark
 
     // Method to calculate distance between two airports
     double calculateDistance(const std::string& from, const std::string& to) {
