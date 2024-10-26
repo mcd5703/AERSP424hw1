@@ -45,5 +45,5 @@ public:
     bool getAtSC() const{return at_SC;}
 
     // Getter and setter functions
-    double getVel() const {return velo;}
+    double getVelo() const {return velo;}
     void setVelo(double new_Velo) {velo = new_Velo;}};
