@@ -1,6 +1,8 @@
 #include "Problem2.hpp"
 
-int main() {
+// This code initializes the flight distances map container required for future problem
+int main() 
+{
     // Adding the flight distances to the map container
     flight_dist["PHL"] = 160;  // Flight distance between State College and Philadelphia
     flight_dist["ORD"] = 640;  // Flight distance between State College and Chicago

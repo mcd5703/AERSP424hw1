@@ -1,3 +1,6 @@
+#ifndef PLANE_HPP // #include guards mandated 
+#define PLANE_HPP
+
 // Plane.hpp
 #include "Problem2.hpp" // Container from problem 2
 #include <iostream>
@@ -15,7 +18,7 @@ private:
     bool at_SCE;        // At SCE?
     string origin;      // Origin
     string destination; // Destination
-    
+
 
     // Method to help calculate distance between two airports
     double calculateDistance(const string& from, const string& to) 
@@ -89,3 +92,6 @@ public:
         }
     }
 };
+
+
+#endif // PLANE_HPP

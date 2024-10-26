@@ -1,3 +1,6 @@
+#ifndef PROBLEM1_HPP // #include guards mandated 
+#define PROBLEM1_HPP
+
 #include<iostream>
 #include<iomanip>
 #include<vector>
@@ -31,3 +34,5 @@ const double Aft_CGL = 84.7;
 // Setting up vectors for passengers and respective weights
 vector<double> foccw(num_focc);
 vector<double> roccw(num_rocc);
+
+#endif // PROBLEM1_HPP
