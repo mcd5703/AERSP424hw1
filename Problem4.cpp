@@ -6,7 +6,7 @@ int main() {
     Plane plane("SCE", "PHL");
 
     // Set velocity
-    plane.setVelo(200); // Units per second (example value)
+    plane.setVel(200); // Units per second (example value)
 
     // Operate the plane for a certain time
     plane.operate(1); // Operate for 1 second
