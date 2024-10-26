@@ -26,10 +26,10 @@ int main() {
     cout << "Plane Created with a tail number at " << &plane << endl;
 
     // Iterate, calling the operate function
-    int time_elapsed = 0;
+    int telapsed = 0;
     for (int i = 0; i < max_iter; i++) {
         // Print the current time and position
-        cout << "Time: " << time_elapsed << " seconds, Position: " << plane.getPos() << " miles" << endl;
+        cout << "Time: " << telapsed << " seconds, Position: " << plane.getPos() << " miles" << endl;
 
         // Operate the plane for this timestep
         plane.operate(tstep);
