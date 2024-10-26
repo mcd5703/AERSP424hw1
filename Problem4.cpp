@@ -14,24 +14,26 @@ public:
     Plane(const string& from, const string& to) 
         : origin(from), dest(to), pos(0), velo(0), at_SC(0) {
         dist = calculateDistance(origin, dest);
-        cout << "Plane Created at " << this << endl;}
+        cout << "Plane Created at " << this << endl;
+    };
 
     // Destructor
     ~Plane() {
-        cout << "Plane Destroyed" << endl;}
+        cout << "Plane Destroyed" << endl;
+    };
 
     // Getter functions
-    string getOrigin() const{return origin;}
-    string getDest() const{return dest;}
-    double getDist() const{return dist;}
-    double getPos() const{return pos;}
-    double getVelo() const{return velo;}
-    double getAtSC() const{return at_SC;}
+    string getOrigin() const{return origin;};
+    string getDest() const{return dest;};
+    double getDist() const{return dist;};
+    double getPos() const{return pos;};
+    double getVelo() const{return velo;};
+    double getAtSC() const{return at_SC;};
 
     // Setter functions
-    void setPos(double position) {pos = position >= 0 ? position : 0;}
-    void setVelo(double velocity) {velo = velocity >= 0 ? velocity : 0;}
-    void setAtSC(double timeAtSC) {at_SC = timeAtSC >= 0 ? timeAtSC : 0;}
+    void setPos(double position) {pos = position >= 0 ? position : 0;};
+    void setVelo(double velocity) {velo = velocity >= 0 ? velocity : 0;};
+    void setAtSC(double timeAtSC) {at_SC = timeAtSC >= 0 ? timeAtSC : 0;};
 
     // Setting flight distance and airport container
     flight_dist["PHL"] = 160;  // Flight distance between State College and Philadelphia
@@ -43,7 +45,7 @@ public:
         // Dummy implementation - replace with actual logic based on Q2
         return abs(static_cast<int>(from.length() - to.length())) * 100.0;
     };
-    
+
     // Operate function (based on a presumed flowchart)
     void operate(double timeStep) {
         if (timeStep < 0) {
@@ -68,4 +70,4 @@ int main() {
     //plane.operate(5);        // Simulate 5 seconds of operation
     //cout << "Plane position after 5 seconds: " << plane.getPos() << endl;
     //return 0;
-}
+};

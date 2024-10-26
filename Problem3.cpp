@@ -46,4 +46,6 @@ public:
 
     // Getter and setter functions
     double getVelo() const {return velo;}
-    void setVelo(double new_Velo) {velo = new_Velo;}};
+    void setVelo(double new_Velo) {velo = new_Velo;}
+
+};
